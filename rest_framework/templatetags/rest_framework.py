@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import re
+import json
 
 from django import template
 from django.core.urlresolvers import NoReverseMatch, reverse
@@ -255,3 +256,8 @@ def break_long_headers(header):
     if len(header) > 160 and ',' in header:
         header = mark_safe('<br> ' + ', <br>'.join(header.split(',')))
     return header
+
+@register.filter
+def json_load(value):
+    return json.loads(value)
+
